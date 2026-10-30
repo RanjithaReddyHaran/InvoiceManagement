@@ -1,0 +1,34 @@
+# Solution architecture (Mermaid)
+
+```mermaid
+flowchart TB
+    U[Staffing Admin / Resource Manager / Approver / Billing Specialist]
+    UI[Angular 14 Web UI]
+    API[ASP.NET Core 8 Web API]
+    MW[Cross-cutting middleware\nValidation • Exception handling • Logging]
+    SVC[Business Services\nInvoice • Timesheet • Payment]
+    DAL[EF Core Data Access]
+    DB[(SQL Server)]
+    PDF[PDF Invoice Service]
+    EMAIL[Email Delivery Provider\nPlanned integration]
+    AUDIT[Persistent Audit Log\nPlanned extension]
+
+    U -->|HTTPS| UI
+    UI -->|REST / JSON| API
+    API --> MW --> SVC
+    SVC --> DAL --> DB
+    SVC --> PDF
+    SVC -. future .-> EMAIL
+    API -. future .-> AUDIT
+```
+
+## Responsibility boundaries
+
+- **Angular UI:** data entry, dashboards, workflow actions, and client-side feedback.
+- **API controllers:** HTTP contract, request/response mapping, and status codes.
+- **Application services:** billing rules, invoice lifecycle, and payment validation.
+- **EF Core / SQL Server:** persistence, relationships, precision, constraints, and transactions.
+- **PDF service:** renders a stable invoice document from saved invoice snapshots.
+- **Logging / exception middleware:** structured operational diagnostics and consistent error responses.
+
+The current starter implements the API, EF Core persistence, invoice PDF generation, and core invoice/payment workflow. Email delivery, persistent audit tables, authentication/authorization, and production-grade concurrency/idempotency controls are planned extensions.

@@ -1,0 +1,40 @@
+# Invoice workflow (Mermaid)
+
+```mermaid
+flowchart TD
+    A[Create client] --> B[Create resource and client assignment]
+    B --> C[Create contract with rate and effective dates]
+    C --> D[Enter timesheet for billing period]
+    D --> E{Timesheet reviewed?}
+    E -- No --> D
+    E -- Yes --> F[Approve timesheet]
+    F --> G[Billing specialist selects client and date range]
+    G --> H{Approved, uninvoiced timesheets exist?}
+    H -- No --> X[Show validation message]
+    H -- Yes --> I{Active contract rate covers service period?}
+    I -- No --> Y[Show missing/invalid contract error]
+    I -- Yes --> J[Calculate hours × rate and applicable tax]
+    J --> K[Create invoice and line snapshots]
+    K --> L[Link timesheets to invoice in SQL transaction]
+    L --> M[Review invoice]
+    M --> N{Approved?}
+    N -- No --> O[Keep as Draft / correct data]
+    N -- Yes --> P[Approve invoice]
+    P --> Q[Generate PDF]
+    Q --> R[Send invoice to client - email integration]
+    R --> S[Record full or partial payment]
+    S --> T{Balance due = 0?}
+    T -- Yes --> U[Mark Paid]
+    T -- No --> V[Keep balance outstanding / follow up]
+```
+
+## Key business rules
+
+1. An invoice can only be generated from approved timesheets that have not already been invoiced.
+2. The client on the resource assignment must match the selected invoice client.
+3. A valid contract must cover the timesheet service period.
+4. Invoice amounts use decimal arithmetic and explicit SQL precision; do not use floating-point types for currency.
+5. Invoice lines store the billed resource name, hours, rate, and amount as a historical snapshot.
+6. Invoice generation and timesheet linking must be atomic.
+7. Payments must be positive and cannot exceed the outstanding balance.
+8. Draft and void invoices cannot receive payments.
