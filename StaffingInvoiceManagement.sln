@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffingInvoice.Api", "src\StaffingInvoice.Api\StaffingInvoice.Api.csproj", "{A12B8D12-5B8B-4E18-8E19-1C21D22D0011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffingInvoice.Tests", "tests\StaffingInvoice.Tests\StaffingInvoice.Tests.csproj", "{B23C9E23-6C9C-4F29-9F20-2D32E33E0022}"
+EndProject
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+        {A12B8D12-5B8B-4E18-8E19-1C21D22D0011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {A12B8D12-5B8B-4E18-8E19-1C21D22D0011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {A12B8D12-5B8B-4E18-8E19-1C21D22D0011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {A12B8D12-5B8B-4E18-8E19-1C21D22D0011}.Release|Any CPU.Build.0 = Release|Any CPU
+        {B23C9E23-6C9C-4F29-9F20-2D32E33E0022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {B23C9E23-6C9C-4F29-9F20-2D32E33E0022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {B23C9E23-6C9C-4F29-9F20-2D32E33E0022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {B23C9E23-6C9C-4F29-9F20-2D32E33E0022}.Release|Any CPU.Build.0 = Release|Any CPU
+    EndGlobalSection
+EndGlobal
